@@ -195,6 +195,14 @@ body {
       background-repeat: no-repeat;
    }
 
+.left1 {
+ width: 50%;
+      position: absolute;
+      bottom: 0;
+      center: 5%;
+   }
+
+
    .kotakutama .bedug {
       width: 10%;
       position: absolute;
