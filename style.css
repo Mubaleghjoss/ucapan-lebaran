@@ -161,7 +161,7 @@ body {
    }
    
 .btn {
-  background-color: #199319;
+  background-color: transparent;
   color: white;
   padding: 15px 25px;
   text-decoration: none;
@@ -199,7 +199,7 @@ body {
  width: 50%;
       position: absolute;
       bottom: 0;
-      center: 5%;
+      center: 50%;
    }
 
 
