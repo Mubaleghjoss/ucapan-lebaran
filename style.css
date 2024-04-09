@@ -159,6 +159,13 @@ body {
       border: solid 3px #fff;
       font-weight: bold;
    }
+   
+.btn {
+  background-color: #199319;
+  color: white;
+  padding: 15px 25px;
+  text-decoration: none;
+}
 
    .enter:hover {
       background: #fff;
