@@ -202,7 +202,14 @@ body {
       width: 50%;
    
    }
-
+   
+.left2 {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+   
+   }
 
    .kotakutama .bedug {
       width: 10%;
