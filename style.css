@@ -267,6 +267,20 @@ img {
   min-height: 100%;
 }
 
+.panel--bank {
+  background:
+    radial-gradient(circle at top left, rgba(244, 207, 125, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
+    rgba(12, 36, 29, 0.78);
+}
+
+.panel--zones {
+  background:
+    radial-gradient(circle at top right, rgba(112, 200, 167, 0.09), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    rgba(8, 28, 23, 0.58);
+}
+
 .panel__head h2,
 .success-copy h2 {
   margin: 0;
@@ -292,6 +306,15 @@ img {
   align-content: flex-start;
   gap: 0.65rem;
   min-height: 18rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(244, 207, 125, 0.16);
+  border-radius: 1.1rem;
+  background:
+    linear-gradient(180deg, rgba(244, 207, 125, 0.06), rgba(255, 255, 255, 0.02)),
+    rgba(8, 31, 25, 0.62);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 .chip-bank:empty::before {
@@ -311,13 +334,18 @@ img {
   justify-content: center;
   min-height: 44px;
   padding: 0.7rem 0.95rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(244, 207, 125, 0.18);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.07);
+  background:
+    linear-gradient(135deg, rgba(244, 207, 125, 0.12), rgba(255, 255, 255, 0.03)),
+    rgba(28, 55, 48, 0.92);
   color: var(--text);
   font-weight: 700;
   line-height: 1.35;
   text-align: center;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 8px 16px rgba(0, 0, 0, 0.1);
   transition:
     transform 0.2s ease,
     border-color 0.2s ease,
@@ -328,15 +356,20 @@ img {
 
 .chip[draggable="true"] {
   cursor: grab;
+  animation: chip-breathe 4.2s ease-in-out infinite;
 }
 
 .chip.is-selected,
 .chip:hover,
 .chip:focus-visible {
-  transform: translateY(-1px);
-  border-color: rgba(244, 207, 125, 0.5);
-  background: rgba(244, 207, 125, 0.12);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px) scale(1.01);
+  border-color: rgba(244, 207, 125, 0.54);
+  background:
+    linear-gradient(135deg, rgba(244, 207, 125, 0.2), rgba(255, 255, 255, 0.06)),
+    rgba(36, 67, 58, 0.96);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(244, 207, 125, 0.14);
 }
 
 .chip.is-dragging {
@@ -353,6 +386,7 @@ img {
   background: rgba(143, 215, 182, 0.12);
   border-color: rgba(143, 215, 182, 0.36);
   color: #effdf7;
+  box-shadow: none;
 }
 
 .category-grid,
@@ -372,11 +406,12 @@ img {
   gap: 0.85rem;
   min-height: 15rem;
   padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px dashed rgba(255, 255, 255, 0.14);
   border-radius: 1.35rem;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
-    rgba(9, 31, 26, 0.6);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+    rgba(7, 24, 20, 0.56);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
   transition:
     transform 0.22s ease,
     border-color 0.22s ease,
@@ -458,6 +493,10 @@ img {
   align-content: flex-start;
   gap: 0.5rem;
   min-height: 4.6rem;
+  padding: 0.7rem;
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .category__hint {
@@ -1017,6 +1056,22 @@ body.is-open .intro {
 
   50% {
     transform: scale(1.07);
+  }
+}
+
+@keyframes chip-breathe {
+  0%,
+  100% {
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+      0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  50% {
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+      0 12px 22px rgba(0, 0, 0, 0.14),
+      0 0 0 1px rgba(244, 207, 125, 0.08);
   }
 }
 
