@@ -1,65 +1,167 @@
 <!DOCTYPE html>
-<html translate="no">
-
+<html lang="id" translate="no">
 <head>
-<meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=7">
-  <title>Selamat Hari Raya Idul Fitri 1446 H / 2025 M </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google" content="notranslate">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <meta name="description" content="Ucapan Hari Raya Idul Fitri 1447 H / 2026 M dengan puzzle pembuka 29 Karakter Luhur, tampilan modern, dan responsif.">
+  <meta name="theme-color" content="#0d3c33">
+  <title>Selamat Hari Raya Idul Fitri 1447 H / 2026 M</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
-  <div class='enter'>YUK DIBUKA</div>
-  <div class='door'>
-    <div class='left'></div>
-    <div class='right'></div>
-  </div>
-  <div class="fireworks kotakutama">
-    <div class="kotakteks">
-      <h2 class="ml10">
-        <span class="text-wrapper text-center">
-          <span class="letter">KELUARGA PUTRA KAMULYAN </span>
-        </span>
-        <span class="text-wrapper text-center">
-          <span class="letter">MENGUCAPKAN : </span>
-        </span>
-        <span class="text-wrapper text-center">
-          <span class="letter">SELAMAT HARI RAYA IDUL FITRI 1446H</span>
-        </span>
-        <br>
-        <span class="text-wrapperz text-center">
-          <span class="letterz">MOHON MAAF LAHIR BATIN</span>
-          <h2><span class="letter"> تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ </span></h2>
-        </span>
-      </h2>
-<br>
-<br>
-<a class="btn" href="https://link.dana.id/danakaget?c=s5vl8pttp&r=h8Vy5k&orderId=20250331101214335815010300166001214853079" target="blank">Ambil THR Mu Sebelum Terlambat</a>
+  <section class="intro" id="introGame" aria-labelledby="puzzleTitle">
+    <div class="intro__glow intro__glow--one" aria-hidden="true"></div>
+    <div class="intro__glow intro__glow--two" aria-hidden="true"></div>
+
+    <div class="intro__shell">
+      <header class="intro__header">
+        <p class="intro__eyebrow">Puzzle Pembuka</p>
+        <h1 class="intro__title" id="puzzleTitle">Susun 29 Karakter Luhur</h1>
+        <p class="intro__lead">
+          Seret atau ketuk tiap poin ke tema yang tepat. Setelah semua 29 poin resmi tersusun, tombol untuk membuka halaman ucapan akan muncul.
+        </p>
+
+        <div class="intro__progress" aria-hidden="true">
+          <span id="progressFill"></span>
+        </div>
+
+        <div class="intro__meta">
+          <span class="intro__pill" id="progressPill">0 / 29 selesai</span>
+          <span class="intro__pill" id="timerPill">00:00</span>
+          <a class="intro__link" href="https://smaafbs.sch.id/29-karakter-luhur" target="_blank" rel="noreferrer">Referensi 29 Karakter Luhur SMA AFBS</a>
+          <button class="btn btn--secondary btn--small" id="resetPuzzle" type="button">Acak Ulang</button>
+        </div>
+      </header>
+
+      <div class="intro__layout">
+        <aside class="panel panel--bank">
+          <div class="panel__head">
+            <h2>Kartu Poin</h2>
+            <p>Desktop bisa drag-and-drop. Di HP, ketuk kartu lalu ketuk tema tujuan.</p>
+          </div>
+          <div class="chip-bank" id="chipBank" aria-live="polite"></div>
+        </aside>
+
+        <section class="panel panel--zones" aria-labelledby="themesTitle">
+          <div class="panel__head">
+            <h2 id="themesTitle">Tema Karakter</h2>
+            <p>Cocokkan poin ke kelompok resminya berdasarkan daftar 29 Karakter Luhur.</p>
+          </div>
+          <div class="category-grid" id="categoryBoard"></div>
+        </section>
+      </div>
+
+      <footer class="intro__footer">
+        <p class="puzzle-status" id="puzzleStatus" role="status" aria-live="polite">Mulai dari tema yang paling Anda ingat.</p>
+
+        <div class="intro__actionbar" id="actionBar">
+          <div class="actionbar__badge" id="actionBadge" aria-hidden="true">0</div>
+          <div class="actionbar__copy">
+            <p class="actionbar__eyebrow" id="actionEyebrow">Tombol belum aktif</p>
+            <h2 id="actionTitle">Susun semua 29 karakter dulu</h2>
+            <p id="actionText">Kalau ada yang kurang pas, petunjuk terakhir akan tetap muncul di sini.</p>
+          </div>
+          <button class="btn btn--primary btn--locked" id="openGreeting" type="button" disabled aria-disabled="true">Ambil THR di Halaman Berikutnya</button>
+        </div>
+      </footer>
     </div>
+  </section>
 
+  <div class="modal" id="feedbackModal" hidden>
+    <div class="modal__backdrop" data-close-modal="true"></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalMessage">
+      <button class="modal__close" id="modalClose" type="button" aria-label="Tutup popup">x</button>
+      <div class="modal__badge" id="modalBadge" aria-hidden="true">!</div>
+      <p class="modal__eyebrow" id="modalEyebrow">Masih kurang pas</p>
+      <h2 class="modal__title" id="modalTitle">Coba cek lagi penempatannya</h2>
+      <p class="modal__message" id="modalMessage">Lihat petunjuknya, lalu lanjut susun puzzle sampai semua pas.</p>
 
+      <div class="modal__details">
+        <div class="modal__detail-card">
+          <span id="modalMetaOneLabel">Kurang pas di</span>
+          <strong id="modalMetaOneValue">-</strong>
+        </div>
+        <div class="modal__detail-card">
+          <span id="modalMetaTwoLabel">Lebih pas di</span>
+          <strong id="modalMetaTwoValue">-</strong>
+        </div>
+      </div>
 
-    <img src="bedug.webp" class='left1'>
-    <img src="we4.png" class='left2'>
-    <!-- <img src="we2.png" class="bedug2">
-    <img src="we3.png" class="bedug3"> -->
+      <div class="modal__actions">
+        <button class="btn btn--secondary" id="modalDismiss" type="button">Lanjut Susun Puzzle</button>
+        <button class="btn btn--primary" id="modalAction" type="button" hidden>Ambil THR di Halaman Berikutnya</button>
+      </div>
+    </div>
   </div>
 
+  <main class="scene fireworks" id="celebrationScene" aria-hidden="true">
+    <div class="scene__backdrop" aria-hidden="true"></div>
+    <div class="scene__glow scene__glow--one" aria-hidden="true"></div>
+    <div class="scene__glow scene__glow--two" aria-hidden="true"></div>
 
-  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <section class="hero" aria-labelledby="greeting-title">
+      <p class="eyebrow reveal" style="--delay: 0.12s;">Keluarga Putra Kamulyan</p>
+      <h1 class="headline reveal" id="greeting-title" style="--delay: 0.24s;">
+        Selamat Hari Raya
+        <span>Idul Fitri 1447 H / 2026 M</span>
+      </h1>
+      <p class="lead reveal" style="--delay: 0.38s;">
+        Semoga hari kemenangan ini membawa hati yang lapang, silaturahmi yang hangat, dan keberkahan untuk keluarga kita semua.
+      </p>
+      <p class="blessing reveal" style="--delay: 0.5s;">Mohon maaf lahir dan batin</p>
+      <p class="arabic reveal" style="--delay: 0.62s;" lang="ar" dir="rtl">تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ</p>
+
+      <div class="memories reveal" style="--delay: 0.7s;" aria-label="Galeri foto keluarga">
+        <article class="memory-card">
+          <span class="memory-card__label">2023</span>
+          <img src="2023.png" alt="Foto keluarga tahun 2023">
+        </article>
+        <article class="memory-card">
+          <span class="memory-card__label">2024</span>
+          <img src="2024.png" alt="Foto keluarga tahun 2024">
+        </article>
+        <article class="memory-card">
+          <span class="memory-card__label">2025</span>
+          <img src="2025.png" alt="Foto keluarga tahun 2025">
+        </article>
+        <article class="memory-card">
+          <span class="memory-card__label">2026</span>
+          <img src="2026.png" alt="Foto keluarga tahun 2026">
+        </article>
+      </div>
+
+      <div class="hero__actions reveal" style="--delay: 0.82s;">
+        <a class="btn btn--primary" id="thrButton" href="https://link.dana.id/danakaget?c=sz7lgn4wr&r=h8Vy5k&orderId=20260320101214279515010300166001269128741" target="_blank" rel="noreferrer">Ambil THR Sekarang</a>
+        <button class="btn btn--secondary" id="audioToggle" type="button" aria-pressed="false">Putar Takbiran</button>
+      </div>
+
+      <div class="hero__stats reveal" style="--delay: 0.9s;">
+        <article class="hero__stat">
+          <span class="hero__stat-label">Durasi Menyusun Puzzle</span>
+          <strong class="hero__stat-value" id="puzzleDurationText">00:00</strong>
+          <p class="hero__stat-note" id="puzzleDurationNote">Waktu final akan tampil setelah semua 29 poin tersusun benar.</p>
+        </article>
+        <article class="hero__stat">
+          <span class="hero__stat-label">Urutan Ambil THR</span>
+          <strong class="hero__stat-value" id="thrRankText">Belum dihitung</strong>
+          <p class="hero__stat-note" id="thrRankNote">Nomor urutan muncul saat tombol Ambil THR ditekan.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="showcase reveal" style="--delay: 0.9s;">
+      <div class="showcase__orb" aria-hidden="true"></div>
+      <img src="bedug.webp" class="showcase__family" alt="Ilustrasi bedug">
+    </div>
+  </main>
+
+  <audio id="takbiranAudio" src="takbiran.mp3" preload="none"></audio>
+
   <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
-  <script>
-    const container = document.querySelector('.fireworks')
-    const fireworks = new Fireworks.default(container)
-    fireworks.start()
-  </script>
   <script src="script.js"></script>
 </body>
-
 </html>
