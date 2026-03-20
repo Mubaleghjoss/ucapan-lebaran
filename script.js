@@ -427,6 +427,16 @@ function buildChip(item, extraClass = "") {
   return chip;
 }
 
+function syncSelectedChipUI(previousItemId, nextItemId) {
+  if (previousItemId) {
+    chipBank.querySelector(`[data-item-id="${previousItemId}"]`)?.classList.remove("is-selected");
+  }
+
+  if (nextItemId) {
+    chipBank.querySelector(`[data-item-id="${nextItemId}"]`)?.classList.add("is-selected");
+  }
+}
+
 function clearZoneHighlights() {
   categoryBoard.querySelectorAll(".category").forEach((zone) => {
     zone.classList.remove("is-active");
@@ -477,8 +487,9 @@ function renderChipBank() {
         return;
       }
 
+      const previousSelectedId = selectedItemId;
       selectedItemId = selectedItemId === item.id ? null : item.id;
-      renderChipBank();
+      syncSelectedChipUI(previousSelectedId, selectedItemId);
       showStatus(
         selectedItemId
           ? `Poin "${item.label}" dipilih. Sekarang ketuk tema yang menurut Anda tepat.`
