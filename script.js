@@ -131,6 +131,7 @@ const modalMetaOneValue = document.getElementById("modalMetaOneValue");
 const modalMetaTwoLabel = document.getElementById("modalMetaTwoLabel");
 const modalMetaTwoValue = document.getElementById("modalMetaTwoValue");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const coarsePointer = window.matchMedia("(pointer: coarse), (max-width: 820px)");
 
 let shuffledItemIds = [];
 let placedItemIds = new Set();
@@ -307,7 +308,10 @@ function guideCorrectZone(categoryId) {
   zone.classList.add("is-guided");
 
   if (!reducedMotion.matches) {
-    zone.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    zone.scrollIntoView({
+      behavior: coarsePointer.matches ? "auto" : "smooth",
+      block: "nearest"
+    });
   }
 
   window.setTimeout(() => {
@@ -475,6 +479,21 @@ function animateSelectedChip() {
   }, 450);
 }
 
+function handleChipSelection(item) {
+  if (puzzleCompleted) {
+    return;
+  }
+
+  const previousSelectedId = selectedItemId;
+  selectedItemId = selectedItemId === item.id ? null : item.id;
+  syncSelectedChipUI(previousSelectedId, selectedItemId);
+  showStatus(
+    selectedItemId
+      ? `Poin "${item.label}" dipilih. Sekarang ketuk tema yang menurut Anda tepat.`
+      : "Pilihan dibatalkan. Pilih poin lain atau langsung drag ke tema tujuan."
+  );
+}
+
 function renderChipBank() {
   chipBank.innerHTML = "";
 
@@ -482,19 +501,15 @@ function renderChipBank() {
     const chip = buildChip(item, selectedItemId === item.id ? "is-selected" : "");
     chip.draggable = true;
 
-    chip.addEventListener("click", () => {
-      if (puzzleCompleted) {
-        return;
-      }
+    chip.addEventListener("pointerup", () => {
+      handleChipSelection(item);
+    });
 
-      const previousSelectedId = selectedItemId;
-      selectedItemId = selectedItemId === item.id ? null : item.id;
-      syncSelectedChipUI(previousSelectedId, selectedItemId);
-      showStatus(
-        selectedItemId
-          ? `Poin "${item.label}" dipilih. Sekarang ketuk tema yang menurut Anda tepat.`
-          : "Pilihan dibatalkan. Pilih poin lain atau langsung drag ke tema tujuan."
-      );
+    chip.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        handleChipSelection(item);
+      }
     });
 
     chip.addEventListener("dragstart", (event) => {
@@ -594,7 +609,7 @@ function renderCategories() {
       placeItem(itemId, group.id);
     });
 
-    category.addEventListener("click", () => {
+    category.addEventListener("pointerup", () => {
       if (!selectedItemId) {
         return;
       }
@@ -646,7 +661,10 @@ function checkCompletion() {
   });
 
   if (!reducedMotion.matches) {
-    actionBar.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    actionBar.scrollIntoView({
+      behavior: coarsePointer.matches ? "auto" : "smooth",
+      block: "nearest"
+    });
   }
 }
 
